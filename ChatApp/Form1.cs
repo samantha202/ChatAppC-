@@ -249,5 +249,26 @@ namespace ChatApp
 
             }
         }
+
+        private void Private_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex != -1)
+            {
+                String clientName = listBox1.GetItemText(listBox1.SelectedItem);
+
+                chat.Clear();
+                chat.Add("gChat");
+                chat.Add("Admin : " + inputPrivate.Text);
+
+                byte[] byData = ObjectToByteArray(chat);
+                TcpClient workerSocket = null;
+                workerSocket = (TcpClient)clientList.FirstOrDefault(x => x.Key == clientName).Value; //find the client by username in dictionary
+
+                NetworkStream stm = workerSocket.GetStream();
+                stm.Write(byData, 0, byData.Length);
+                stm.Flush();
+                chat.Clear();
+            }
+        }
     }
 }

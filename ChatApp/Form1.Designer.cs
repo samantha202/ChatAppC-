@@ -132,6 +132,7 @@ namespace ChatApp
             this.Private.TabIndex = 8;
             this.Private.Text = "Private";
             this.Private.UseVisualStyleBackColor = false;
+            this.Private.Click += new System.EventHandler(this.Private_Click);
             // 
             // tableLayoutPanel1
             // 
