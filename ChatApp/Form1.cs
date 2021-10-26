@@ -166,11 +166,24 @@ namespace ChatApp
                             });
                             announce(parts[1], username, true);
                             break;
-                    }
 
+                        case "pChat":
+                           
+                            break;
+                    }
                     parts.Clear();
                 }catch 
                 {
+                    updateUI("Client Disconnected: " + username);
+                    announce("Client Disconnected: " + username + "$", username, false);
+                    clientList.Remove(username);
+
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        listBox1.Items.Remove(username);
+                    });
+                    sendUsersList();
+                    break;
                 }
             }
         }
