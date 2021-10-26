@@ -83,5 +83,12 @@ namespace ChatApp
             textBox1.SelectionStart = textBox1.TextLength;
             textBox1.ScrollToCaret();
         }
+        public void updateUI(String m)
+        {
+            this.Invoke((MethodInvoker)delegate // To Write the Received data
+            {
+                textBox1.AppendText(">>" + m + Environment.NewLine);
+            });
+        }
     }
 }
