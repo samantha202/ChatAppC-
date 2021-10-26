@@ -168,7 +168,7 @@ namespace ChatApp
                             break;
 
                         case "pChat":
-                           
+                            privateChat(parts);
                             break;
                     }
                     parts.Clear();
@@ -268,6 +268,23 @@ namespace ChatApp
                 stm.Write(byData, 0, byData.Length);
                 stm.Flush();
                 chat.Clear();
+            }
+        }
+        private void privateChat(List<string> text)
+        {
+            try
+            {
+                byte[] byData = ObjectToByteArray(text);
+
+                TcpClient workerSocket = null;
+                workerSocket = (TcpClient)clientList.FirstOrDefault(x => x.Key == text[1]).Value; //find the client by username in dictionary
+
+                NetworkStream stm = workerSocket.GetStream();
+                stm.Write(byData, 0, byData.Length);
+                stm.Flush();
+            }
+            catch (SocketException se)
+            {
             }
         }
     }
