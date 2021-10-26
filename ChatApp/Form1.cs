@@ -287,5 +287,19 @@ namespace ChatApp
             {
             }
         }
+        private void disconnectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                TcpClient workerSocket = null;
+
+                String clientName = listBox1.GetItemText(listBox1.SelectedItem);
+                workerSocket = (TcpClient)clientList.FirstOrDefault(x => x.Key == clientName).Value; //find the client by username in dictionary
+                workerSocket.Close();
+            }
+            catch (SocketException se)
+            {
+            }
+        }
     }
 }
