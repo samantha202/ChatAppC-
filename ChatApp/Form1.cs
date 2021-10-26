@@ -187,5 +187,48 @@ namespace ChatApp
                 }
             }
         }
+        public async void startServer()
+        {
+            listener.Start();
+            updateUI("Server Started at " + listener.LocalEndpoint);
+            updateUI("Waiting for Clients");
+            try
+            {
+                int counter = 0;
+                while (true)
+                {
+                    counter++;
+                    //client = await listener.AcceptTcpClientAsync();
+                    client = await Task.Run(() => listener.AcceptTcpClientAsync(), cancellation.Token);
+
+                    /* get username */
+                    byte[] name = new byte[50];
+                    NetworkStream stre = client.GetStream(); //Gets The Stream of The Connection
+                    stre.Read(name, 0, name.Length); //Receives Data 
+                    String username = Encoding.ASCII.GetString(name); // Converts Bytes Received to String
+                    username = username.Substring(0, username.IndexOf("$"));
+
+                    /* add to dictionary, listbox and send userList  */
+                    clientList.Add(username, client);
+                    listBox1.Items.Add(username);
+                    updateUI("Connected to user " + username + " - " + client.Client.RemoteEndPoint);
+                    announce(username + " Joined ", username, false);
+
+                    await Task.Delay(1000).ContinueWith(t => sendUsersList());
+                    var c = new Thread(() => ServerReceive(client, username));
+                    c.Start();
+                }
+            }
+            catch (Exception)
+            {
+                listener.Stop();
+            }
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            cancellation = new CancellationTokenSource(); //resets the token when the server restarts
+            startServer();
+        }
     }
 }

@@ -100,19 +100,20 @@ namespace ChatApp
             this.btnStart.BackColor = System.Drawing.SystemColors.HotTrack;
             this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnStart.ForeColor = System.Drawing.SystemColors.Window;
-            this.btnStart.Location = new System.Drawing.Point(934, 102);
+            this.btnStart.Location = new System.Drawing.Point(657, 108);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(229, 59);
             this.btnStart.TabIndex = 6;
             this.btnStart.Text = "Start Server";
             this.btnStart.UseVisualStyleBackColor = false;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // btnStop
             // 
             this.btnStop.BackColor = System.Drawing.SystemColors.HotTrack;
             this.btnStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnStop.ForeColor = System.Drawing.SystemColors.Window;
-            this.btnStop.Location = new System.Drawing.Point(641, 102);
+            this.btnStop.Location = new System.Drawing.Point(904, 108);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(229, 59);
             this.btnStop.TabIndex = 7;
