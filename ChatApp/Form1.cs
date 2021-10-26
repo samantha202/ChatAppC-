@@ -101,5 +101,49 @@ namespace ChatApp
                 return obj;
             }
         }
+        private void Server_Load(object sender, EventArgs e)
+        {
+
+        }
+        //broadcast function to announce user message
+        public void announce(string msg, string uName, bool flag)
+        {
+            try
+            {
+                foreach (var Item in clientList)
+                {
+                    TcpClient broadcastSocket;
+                    broadcastSocket = (TcpClient)Item.Value;
+                    NetworkStream broadcastStream = broadcastSocket.GetStream();
+                    Byte[] broadcastBytes = null;
+
+                    if (flag)
+                    {
+                        //broadcastBytes = Encoding.ASCII.GetBytes("gChat|*|" + uName + " says : " + msg);
+
+                        chat.Add("gChat");
+                        chat.Add(uName + " says : " + msg);
+                        broadcastBytes = ObjectToByteArray(chat);
+                    }
+                    else
+                    {
+                        //broadcastBytes = Encoding.ASCII.GetBytes("gChat|*|" + msg);
+
+                        chat.Add("gChat");
+                        chat.Add(msg);
+                        broadcastBytes = ObjectToByteArray(chat);
+
+                    }
+
+                    broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);
+                    broadcastStream.Flush();
+                    chat.Clear();
+                }
+            }
+            catch (Exception er)
+            {
+
+            }
+        }  //end broadcast function
     }
 }
