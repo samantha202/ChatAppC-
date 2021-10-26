@@ -145,5 +145,34 @@ namespace ChatApp
 
             }
         }  //end broadcast function
+        public void ServerReceive(TcpClient clientn, String username)
+        {
+            byte[] data = new byte[1000];
+            String text = null;
+            while (true)
+            {
+                try
+                {
+                    NetworkStream stream = clientn.GetStream(); //Gets The Stream of The Connection
+                    stream.Read(data, 0, data.Length); //Receives Data 
+                    List<string> parts = (List<string>)ByteArrayToObject(data);
+
+                    switch (parts[0])
+                    {
+                        case "gChat":
+                            this.Invoke((MethodInvoker)delegate // To Write the Received data
+                            {
+                                textBox1.Text += username + ": " + parts[1] + Environment.NewLine;
+                            });
+                            announce(parts[1], username, true);
+                            break;
+                    }
+
+                    parts.Clear();
+                }catch 
+                {
+                }
+            }
+        }
     }
 }
