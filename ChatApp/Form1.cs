@@ -230,5 +230,24 @@ namespace ChatApp
             cancellation = new CancellationTokenSource(); //resets the token when the server restarts
             startServer();
         }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                listener.Stop();
+                updateUI("Server Stopped");
+                foreach (var Item in clientList)
+                {
+                    TcpClient broadcastSocket;
+                    broadcastSocket = (TcpClient)Item.Value;
+                    broadcastSocket.Close();
+                }
+            }
+            catch (SocketException er)
+            {
+
+            }
+        }
     }
 }
