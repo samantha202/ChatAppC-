@@ -131,6 +131,7 @@ namespace Client
             this.create.TabIndex = 6;
             this.create.Text = "Create";
             this.create.UseVisualStyleBackColor = false;
+            this.create.Click += new System.EventHandler(this.create_Click);
             // 
             // connexion
             // 
@@ -142,6 +143,7 @@ namespace Client
             this.connexion.TabIndex = 7;
             this.connexion.Text = "Connexion";
             this.connexion.UseVisualStyleBackColor = false;
+            this.connexion.Click += new System.EventHandler(this.connexion_Click);
             // 
             // firstname
             // 

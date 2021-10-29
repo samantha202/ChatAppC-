@@ -71,6 +71,14 @@ namespace Client
             }
             lst.Add(c);
         }
+        public void getAll(string s)
+        {
+            FileStream fileStream = new FileStream(s, FileMode.Open);
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            List<Client> content;
+            content = (List<Client>)binaryFormatter.Deserialize(fileStream);
+            fileStream.Close();
+        }
 
     }
 }

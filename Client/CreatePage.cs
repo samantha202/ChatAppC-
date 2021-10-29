@@ -12,6 +12,7 @@ namespace Client
 {
     public partial class CreatePage : Form
     {
+        string file = @"A:\users.txt";
         public CreatePage()
         {
             InitializeComponent();
@@ -30,6 +31,23 @@ namespace Client
         private void firstname_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void create_Click(object sender, EventArgs e)
+        {
+            Client clt = new Client(firstname.Text, lastname.Text, email.Text, password.Text);
+            clt.load(file, clt);
+            clt.save(file);
+            new Login().Show();
+            this.Hide();
+        }
+
+        private void connexion_Click(object sender, EventArgs e)
+        {
+            Client c = new Client();
+            c.getAll(file);
+            new Login().Show();
+            this.Hide();
         }
     }
 }
