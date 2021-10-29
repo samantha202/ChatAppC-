@@ -26,5 +26,10 @@ namespace Client
         {
 
         }
+
+        private void firstname_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

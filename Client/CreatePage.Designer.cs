@@ -153,6 +153,7 @@ namespace Client
             this.firstname.Name = "firstname";
             this.firstname.Size = new System.Drawing.Size(413, 65);
             this.firstname.TabIndex = 8;
+            this.firstname.TextChanged += new System.EventHandler(this.firstname_TextChanged);
             // 
             // lastname
             // 
