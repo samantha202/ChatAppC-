@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Client
 {
+    //save the state of a client object and recreate it if necessary
+    [Serializable()]
     class Client
     {
         private string firstname;
@@ -44,5 +48,14 @@ namespace Client
         {
             return password;
         }
+        //this function saves the list of users in a file
+        public void save(string s)
+        {
+            FileStream fileStream = new FileStream(s, FileMode.Create);
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            binaryFormatter.Serialize(fileStream, lst);
+            fileStream.Close();
+        }
+
     }
 }
