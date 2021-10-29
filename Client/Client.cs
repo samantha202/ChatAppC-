@@ -56,6 +56,21 @@ namespace Client
             binaryFormatter.Serialize(fileStream, lst);
             fileStream.Close();
         }
+        //this function retrieves the list of users from a file
+        public void load(string s, Client c)
+        {
+            
+            FileStream fileStream = new FileStream(s, FileMode.Open);
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            List<Client> content;
+            content = (List<Client>)binaryFormatter.Deserialize(fileStream);
+            fileStream.Close();
+            foreach (Client client in content)
+            {
+                lst.Add(client);
+            }
+            lst.Add(c);
+        }
 
     }
 }
