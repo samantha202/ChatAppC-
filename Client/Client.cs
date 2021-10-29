@@ -17,6 +17,8 @@ namespace Client
         private string email;
         private string password;
         private List<Client> lst;//users list
+        public static string variableSession = "";
+        public static Client cltSession;
 
         public Client(string f, string l, string e, string pass)
         {
@@ -78,6 +80,23 @@ namespace Client
             List<Client> content;
             content = (List<Client>)binaryFormatter.Deserialize(fileStream);
             fileStream.Close();
+        }
+        public List<Client> getClient(string s)
+        {
+
+            FileStream fileStream = new FileStream(s, FileMode.Open);
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            List<Client> content;
+            List<Client> clientL = new List<Client>();
+            content = (List<Client>)binaryFormatter.Deserialize(fileStream);
+            fileStream.Close();
+            Console.WriteLine("Deserialized data: ");
+            foreach (Client client in content)
+            {
+                clientL.Add(client);
+                Console.WriteLine("email " + client.getEmail() + " password  " + client.getPass());
+            }
+            return clientL;
         }
 
     }
