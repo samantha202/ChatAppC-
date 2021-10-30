@@ -31,7 +31,7 @@ namespace Client
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.title = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -60,15 +60,15 @@ namespace Client
             this.label2.Text = "Add a ChatRoom";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
-            // textBox1
+            // title
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.textBox1.Location = new System.Drawing.Point(286, 158);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(448, 78);
-            this.textBox1.TabIndex = 2;
+            this.title.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.title.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.title.Location = new System.Drawing.Point(286, 158);
+            this.title.Multiline = true;
+            this.title.Name = "title";
+            this.title.Size = new System.Drawing.Size(448, 78);
+            this.title.TabIndex = 2;
             // 
             // pictureBox1
             // 
@@ -89,6 +89,7 @@ namespace Client
             this.button1.TabIndex = 4;
             this.button1.Text = "Choose image";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -101,6 +102,7 @@ namespace Client
             this.button2.TabIndex = 5;
             this.button2.Text = "ADD";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // AddForm
             // 
@@ -111,7 +113,7 @@ namespace Client
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.title);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "AddForm";
@@ -126,7 +128,7 @@ namespace Client
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox title;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
