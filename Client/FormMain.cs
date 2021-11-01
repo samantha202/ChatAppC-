@@ -80,8 +80,65 @@ namespace Client
         }
         private void getMessage()
         {
-        }  
-        
+            try
+            {
+                while (true)
+                {
+                    serverStream = clientSocket.GetStream();
+                    byte[] inStream = new byte[10025];
+                    serverStream.Read(inStream, 0, inStream.Length);
+                    List<string> parts = null;
+
+                    if (!SocketConnected(clientSocket))
+                    {
+                        MessageBox.Show("You've been Disconnected");
+                        ctThread.Abort();
+                        clientSocket.Close();
+                        btnConnect.Enabled = true;
+                    }
+
+                    parts = (List<string>)ByteArrayToObject(inStream);
+                    switch (parts[0])
+                    {
+                        case "userList":
+                            break;
+
+                        case "gChat":
+                            readData = "" + parts[1];
+                            msg();
+                            break;
+
+                        case "pChat":
+                            break;
+                    }
+
+                    if (readData[0].Equals('\0'))
+                    {
+                        readData = "Reconnect Again";
+                        msg();
+
+                        this.Invoke((MethodInvoker)delegate // To Write the Received data
+                        {
+                            btnConnect.Enabled = true;
+                        });
+
+                        ctThread.Abort();
+                        clientSocket.Close();
+                        break;
+                    }
+                    chat.Clear();
+                }
+            }
+            catch (Exception e)
+            {
+                ctThread.Abort();
+                clientSocket.Close();
+                btnConnect.Enabled = true;
+                Console.WriteLine(e);
+            }
+
+        }
+
         //converting object to ByteArray
         public byte[] ObjectToByteArray(object _Object)
         {
@@ -103,6 +160,55 @@ namespace Client
                 memStream.Seek(0, SeekOrigin.Begin);
                 var obj = binForm.Deserialize(memStream);
                 return obj;
+            }
+        }
+        bool SocketConnected(TcpClient s) //check whether client is connected server
+        {
+            bool flag = false;
+            try
+            {
+                bool part1 = s.Client.Poll(10, SelectMode.SelectRead);
+                bool part2 = (s.Available == 0);
+                if (part1 && part2)
+                {
+                    indicator.BackColor = Color.Red;
+                    this.Invoke((MethodInvoker)delegate // cross threads
+                    {
+                        btnConnect.Enabled = true;
+                    });
+                    flag = false;
+                }
+                else
+                {
+                    indicator.BackColor = Color.Green;
+                    flag = true;
+                }
+            }
+            catch (Exception er)
+            {
+                Console.WriteLine(er);
+            }
+            return flag;
+        }
+        private void btnSend_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!input.Text.Equals(""))
+                {
+                    chat.Add("gChat");
+                    chat.Add(input.Text);
+                    byte[] outStream = ObjectToByteArray(chat);
+
+                    serverStream.Write(outStream, 0, outStream.Length);
+                    serverStream.Flush();
+                    input.Text = "";
+                    chat.Clear();
+                }
+            }
+            catch (Exception er)
+            {
+                btnConnect.Enabled = true;
             }
         }
     }
