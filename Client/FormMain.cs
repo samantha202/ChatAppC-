@@ -136,7 +136,6 @@ namespace Client
                 btnConnect.Enabled = true;
                 Console.WriteLine(e);
             }
-
         }
 
         //converting object to ByteArray
@@ -210,6 +209,49 @@ namespace Client
             {
                 btnConnect.Enabled = true;
             }
+        }
+        private void privateChatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex != -1)
+            {
+                String clientName = listBox1.GetItemText(listBox1.SelectedItem);
+                chat.Clear();
+                chat.Add("pChat");
+                chat.Add(clientName);
+                chat.Add(name);
+                chat.Add("new");
+
+                byte[] outStream = ObjectToByteArray(chat);
+                serverStream.Write(outStream, 0, outStream.Length);
+                serverStream.Flush();
+
+                FormPrivate privateChat = new FormPrivate(clientName, clientSocket, name);
+                nowChatting.Add(clientName);
+                privateChat.Text = "Private Chat with " + clientName;
+                privateChat.Show();
+                chat.Clear();
+            }
+        }
+        public void managePrivateChat(List<string> parts)
+        {
+
+            this.Invoke((MethodInvoker)delegate // To Write the Received data
+            {
+                if (parts[3].Equals("new"))
+                {
+                    FormPrivate privateC = new FormPrivate(parts[2], clientSocket, name);
+                    nowChatting.Add(parts[2]);
+                    privateC.Text = "Private Chat with " + parts[2];
+                    privateC.Show();
+                }
+                else
+                {
+                    if (Application.OpenForms["formPrivate"] != null)
+                    {
+                        (Application.OpenForms["formPrivate"] as FormPrivate).setHistory(parts[3]);
+                    }
+                }
+            });
         }
     }
 }
