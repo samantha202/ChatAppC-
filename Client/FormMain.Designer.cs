@@ -57,6 +57,7 @@ namespace Client
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(240, 452);
             this.listBox1.TabIndex = 1;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label1
             // 
@@ -94,10 +95,10 @@ namespace Client
             // 
             this.input.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.input.Font = new System.Drawing.Font("Arial", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.input.Location = new System.Drawing.Point(32, 597);
+            this.input.Location = new System.Drawing.Point(32, 620);
             this.input.Multiline = true;
             this.input.Name = "input";
-            this.input.Size = new System.Drawing.Size(355, 65);
+            this.input.Size = new System.Drawing.Size(355, 42);
             this.input.TabIndex = 5;
             this.input.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 

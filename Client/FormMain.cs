@@ -43,7 +43,11 @@ namespace Client
         {
 
         }
-
+        public void setName(String title)
+        {
+            this.Text = title;
+            name = title;
+        }
         //this function allows you to connect to the server
         private void btnConnect_Click(object sender, EventArgs e)
         {
@@ -101,6 +105,7 @@ namespace Client
                     switch (parts[0])
                     {
                         case "userList":
+                            getUsers(parts);
                             break;
 
                         case "gChat":
@@ -109,6 +114,7 @@ namespace Client
                             break;
 
                         case "pChat":
+                            managePrivateChat(parts);
                             break;
                     }
 
@@ -131,6 +137,7 @@ namespace Client
             }
             catch (Exception e)
             {
+                
                 ctThread.Abort();
                 clientSocket.Close();
                 btnConnect.Enabled = true;
@@ -210,27 +217,10 @@ namespace Client
                 btnConnect.Enabled = true;
             }
         }
+        //this function allows to initiate a private conversation according to the selected user
         private void privateChatToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (listBox1.SelectedIndex != -1)
-            {
-                String clientName = listBox1.GetItemText(listBox1.SelectedItem);
-                chat.Clear();
-                chat.Add("pChat");
-                chat.Add(clientName);
-                chat.Add(name);
-                chat.Add("new");
 
-                byte[] outStream = ObjectToByteArray(chat);
-                serverStream.Write(outStream, 0, outStream.Length);
-                serverStream.Flush();
-
-                FormPrivate privateChat = new FormPrivate(clientName, clientSocket, name);
-                nowChatting.Add(clientName);
-                privateChat.Text = "Private Chat with " + clientName;
-                privateChat.Show();
-                chat.Clear();
-            }
         }
         public void managePrivateChat(List<string> parts)
         {
@@ -252,6 +242,38 @@ namespace Client
                     }
                 }
             });
+        }
+        //retrieve the list of connected users in order to display them in the listBox
+        public void getUsers(List<string> parts)
+        {
+            this.Invoke((MethodInvoker)delegate
+            {
+                listBox1.Items.Clear();
+                for (int i = 1; i < parts.Count; i++)
+                {
+                    listBox1.Items.Add(parts[i]);
+                }
+            });
+        }
+        //function which is called when we want to close the interface
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult dialog = MessageBox.Show("Do you want to exit? ", "Exit", MessageBoxButtons.YesNo);
+            if (dialog == DialogResult.Yes)
+            {
+                try
+                {
+                    ctThread.Abort();
+                    clientSocket.Close();
+                }
+                catch (Exception ee) { }
+
+                Application.ExitThread();
+            }
+            else if (dialog == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
         }
     }
 }

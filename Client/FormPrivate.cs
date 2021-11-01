@@ -27,6 +27,12 @@ namespace Client
         public FormPrivate(String friend, TcpClient c, String name)
         {
         }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         public void setHistory(String message)
         {
         }

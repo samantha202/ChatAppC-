@@ -37,6 +37,7 @@ namespace Client
                     Client.variableSession = ct.getFirstName();
                     Client.cltSession = ct;
                     Home home = new Home();
+                    home.setName(ct.getFirstName());
                     home.Show();
                     this.Hide();
                 }

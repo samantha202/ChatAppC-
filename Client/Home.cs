@@ -43,6 +43,7 @@ namespace Client
 
             FormMain form = new FormMain();
             string comCat = " " + Client.variableSession + "--- " + ChatRoom.topicSession;
+            form.setName(Client.variableSession);
             form.Show();
             this.Hide();
         }
