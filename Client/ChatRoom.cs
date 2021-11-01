@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Client
 {
+    [Serializable()]
     class ChatRoom
     {
         private string title;

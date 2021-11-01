@@ -20,7 +20,7 @@ namespace Client
         {
             InitializeComponent();
             ChatRoom t = new ChatRoom();
-            t.load(file);
+           // t.load(file);
         }
         public void setName(String title)
         {
