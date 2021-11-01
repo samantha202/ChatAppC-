@@ -29,27 +29,28 @@ namespace Client
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.history = new System.Windows.Forms.TextBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.input = new System.Windows.Forms.TextBox();
             this.btnSend = new System.Windows.Forms.Button();
             this.btnConnect = new System.Windows.Forms.Button();
+            this.indicator = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // textBox1
+            // history
             // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.textBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox1.Location = new System.Drawing.Point(12, 105);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(696, 380);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.history.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.history.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.history.Location = new System.Drawing.Point(12, 105);
+            this.history.Multiline = true;
+            this.history.Name = "history";
+            this.history.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.history.Size = new System.Drawing.Size(696, 380);
+            this.history.TabIndex = 0;
+            this.history.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // listBox1
             // 
@@ -94,14 +95,15 @@ namespace Client
             this.textBox2.Size = new System.Drawing.Size(420, 52);
             this.textBox2.TabIndex = 4;
             // 
-            // textBox3
+            // input
             // 
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox3.Location = new System.Drawing.Point(27, 590);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(426, 68);
-            this.textBox3.TabIndex = 5;
+            this.input.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.input.Location = new System.Drawing.Point(27, 590);
+            this.input.Multiline = true;
+            this.input.Name = "input";
+            this.input.Size = new System.Drawing.Size(426, 68);
+            this.input.TabIndex = 5;
+            this.input.TextChanged += new System.EventHandler(this.input_TextChanged);
             // 
             // btnSend
             // 
@@ -114,6 +116,7 @@ namespace Client
             this.btnSend.TabIndex = 6;
             this.btnSend.Text = "Send";
             this.btnSend.UseVisualStyleBackColor = false;
+            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
             // btnConnect
             // 
@@ -126,6 +129,14 @@ namespace Client
             this.btnConnect.TabIndex = 7;
             this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = false;
+            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
+            // 
+            // indicator
+            // 
+            this.indicator.Location = new System.Drawing.Point(12, 59);
+            this.indicator.Name = "indicator";
+            this.indicator.Size = new System.Drawing.Size(31, 28);
+            this.indicator.TabIndex = 8;
             // 
             // FormMain
             // 
@@ -133,14 +144,15 @@ namespace Client
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.HighlightText;
             this.ClientSize = new System.Drawing.Size(974, 729);
+            this.Controls.Add(this.indicator);
             this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.btnSend);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.input);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.history);
             this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FormMain";
@@ -154,13 +166,14 @@ namespace Client
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox history;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox input;
         private System.Windows.Forms.Button btnSend;
         private System.Windows.Forms.Button btnConnect;
+        private System.Windows.Forms.Panel indicator;
     }
 }
