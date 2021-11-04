@@ -1,5 +1,4 @@
 # Csharp-Chat-App
-#
 This a is a Chat Application developped in C# with the framework .NET 5,0.
 
 The application is based on a Server / Client interaction, using Windows Form for the front-end.
@@ -10,10 +9,10 @@ The application is based on a Server / Client interaction, using Windows Form fo
 # Features
 On this application i implemetended multiples features such as :
 
-*Login/Register, via a simple text file
+<li>Login/Register, via a simple text file </li>
 
-*ChatRoom which people can join then discuss together
+<li>ChatRoom which people can join then discuss together </li>
 
-*ChatRoom Creation, adding some new button in real time to join those new ChatRoom
+<li>ChatRoom Creation, adding some new button in real time to join those new ChatRoom </li>
 
-*Dm and chat with other users, after adding them in your friendlist
+<li>Dm and chat with other users, after adding them in your friendlist</li>
