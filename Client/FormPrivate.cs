@@ -126,6 +126,37 @@ namespace Client
             }
 
         }
+
+        private void btnSend_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!inputPrivate.Text.Equals(""))
+                {
+                    chat.Clear();
+                    chat.Add("pChat");
+                    chat.Add(friend);
+                    chat.Add(myName);
+                    chat.Add(inputPrivate.Text);
+
+                    byte[] outStream = ObjectToByteArray(chat);
+
+                    serverStream.Write(outStream, 0, outStream.Length);
+                    serverStream.Flush();
+
+                    this.Invoke((MethodInvoker)delegate // To Write the Received data
+                    {
+                        history.Text = history.Text + Environment.NewLine + inputPrivate.Text;
+                        inputPrivate.Text = "";
+                    });
+                }
+            }
+            catch (Exception er)
+            {
+
+            }
+        }
+
         //check whether client is connected server
         bool SocketConnected(TcpClient s)
         {
