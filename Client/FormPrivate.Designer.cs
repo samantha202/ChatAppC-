@@ -92,6 +92,7 @@ namespace Client
             this.Controls.Add(this.inputPrivate);
             this.Controls.Add(this.history);
             this.Name = "FormPrivate";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormPrivate";
             this.Load += new System.EventHandler(this.FormPrivate_Load);
             this.ResumeLayout(false);

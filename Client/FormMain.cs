@@ -82,6 +82,7 @@ namespace Client
             else
                 history.Text = history.Text + Environment.NewLine + " >> " + readData;
         }
+        //to retrieve a message sent on the network
         private void getMessage()
         {
             try
@@ -217,11 +218,6 @@ namespace Client
                 btnConnect.Enabled = true;
             }
         }
-        //this function allows to initiate a private conversation according to the selected user
-        private void privateChatToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
         public void managePrivateChat(List<string> parts)
         {
 
@@ -275,5 +271,34 @@ namespace Client
                 e.Cancel = true;
             }
         }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        //function to open a private conversation
+        private void privateChatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex != -1)
+            {
+                String clientName = listBox1.GetItemText(listBox1.SelectedItem);
+                chat.Clear();
+                chat.Add("pChat");
+                chat.Add(clientName);
+                chat.Add(name);
+                chat.Add("new");
+
+                byte[] outStream = ObjectToByteArray(chat);
+                serverStream.Write(outStream, 0, outStream.Length);
+                serverStream.Flush();
+
+                FormPrivate privateChat = new FormPrivate(clientName, clientSocket, name);
+                nowChatting.Add(clientName);
+                privateChat.Text = "Private Chat with " + clientName;
+                privateChat.Show();
+                chat.Clear();
+            }
+        }
+
     }
 }

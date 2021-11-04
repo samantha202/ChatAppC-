@@ -57,7 +57,8 @@ namespace Client
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(240, 452);
             this.listBox1.TabIndex = 1;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.listBox1.Click += new System.EventHandler(this.privateChatToolStripMenuItem_Click);
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // label1
             // 
